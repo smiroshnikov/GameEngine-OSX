@@ -16,6 +16,7 @@ public class DisplayManager {
     public static void createDisplay() {
 
         ContextAttribs attribs = new ContextAttribs(3, 2).withProfileCore(true).withForwardCompatible(true); // OpenGL version 3.2
+        // line below works on windows and line above is working on mac ? Why , no idea but after 5 hours of goggling I don't give a fuck
         //attribs.withForwardCompatible(true).withProfileCore(true);
         try {
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));

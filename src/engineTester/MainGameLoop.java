@@ -19,19 +19,20 @@ public class MainGameLoop {
         System.out.println("OpenGL Version :" + GL11.glGetString(GL11.GL_VERSION));
 
         float[] vertices = {
-                // Left bottom triangle
-                -0.5f, 0.5f, 0f,
-                -0.5f, -0.5f, 0f,
-                0.5f, -0.5f, 0f,
-                // Right bottom triangle
-                0.5f, -0.5f, 0f,
-                0.5f, 0.5f, 0f,
-                -0.5f, 0.5f, 0f
+                -0.5f, 0.5f, 0,
+                -0.5f, -0.5f, 0,
+                0.5f, -0.5f, 0,
+                0.5f, 0.5f, 0f
         };
 
-        RawModel model = loader.loadToVAO(vertices);
+        int[] indices = {
+                0, 1, 3,
+                3, 1, 2
+        };
 
-        while(!Display.isCloseRequested()){
+        RawModel model = loader.loadToVAO(vertices, indices);
+
+        while (!Display.isCloseRequested()) {
 
             renderer.prepare();
             // game logic

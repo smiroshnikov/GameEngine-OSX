@@ -1,6 +1,7 @@
 package renderEngine;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +12,10 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 /**
- *
  * @author Iidwuurliik
- *
- * This class loads 3d model into memory
- * by storing positional data about in a Vertex Array Object
- *
+ *         <p>
+ *         This class loads 3d model into memory
+ *         by storing positional data about in a Vertex Array Object
  */
 
 public class Loader {
@@ -26,45 +25,46 @@ public class Loader {
     private List<Integer> vbos = new ArrayList<Integer>();
 
 
-    public RawModel loadToVAO (float [] positions){
+    public RawModel loadToVAO(float[] positions, int[] indices) {
         int vaoID = createVAO();
-        storeDataInAttributeList(0,positions);
+        bindIndicesBuffer(indices);
+        storeDataInAttributeList(0, positions);
         unbindVAO();
 
         // x,y,z every 3 values are considered a vertex
-        return new RawModel(vaoID, positions.length/3);
+        return new RawModel(vaoID, indices.length);
     }
 
     public void cleanUP() {
-        for (int vao : vaos){
+        for (int vao : vaos) {
             GL30.glDeleteVertexArrays(vao);
         }
-        for (int vbo : vbos){
+        for (int vbo : vbos) {
             GL15.glDeleteBuffers(vbo);
         }
 
     }
 
     /**
-     *
      * @return ID of the created VAO
      */
-    private int createVAO(){
+    private int createVAO() {
 
         // creates  empty VertexArrayObject and returns ID
         int vaoID = GL30.glGenVertexArrays();
         vaos.add(vaoID);
         // activates VAO by binding it. What does binding means ? requires vaoID
         GL30.glBindVertexArray(vaoID);
-        return vaoID ;
+        return vaoID;
     }
 
     /**
      * Stores data in the VAO attribute list
+     *
      * @param attributeNumber - number of the attribute list in VAO
-     * @param data - data itself (coordinated , colors , normals etc...)
+     * @param data            - data itself (coordinated , colors , normals etc...)
      */
-    private void storeDataInAttributeList(int attributeNumber, float [] data){
+    private void storeDataInAttributeList(int attributeNumber, float[] data) {
         int vboID = GL15.glGenBuffers(); // vertex buffer object Id is created here empty VBO
         vbos.add(vboID);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);// binding VBO  - TODO read !
@@ -86,9 +86,36 @@ public class Loader {
      * When finished using VAO ,
      * un-binds currently bound VAO
      */
-    private void unbindVAO () {
+    private void unbindVAO() {
         //TODO understand meaning of binding and un-binding
         GL30.glBindVertexArray(0); // 0 instead of ID
+    }
+
+
+    /**
+     * This class is required because we need a more affective way to
+     * manage our vertices , if same edge is  is shared among many vertexes
+     * it is not wise to use them over and over again , great idea would be to index
+     *
+     * @param indices index of vertex array
+     */
+    private void bindIndicesBuffer(int[] indices) {
+        int vboID = GL15.glGenBuffers();
+        vbos.add(vboID);
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboID);
+        IntBuffer buffer = storeDataInIntBuffer(indices);
+        // storing in VBO
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
+    }
+
+    /**
+     * Indices must be stored in int buffer
+     */
+    private IntBuffer storeDataInIntBuffer(int[] data) {
+        IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
+        buffer.put(data);
+        buffer.flip();
+        return buffer;
     }
 
 
@@ -99,11 +126,11 @@ public class Loader {
      * @param data
      * @return
      */
-    private FloatBuffer storeDataInFloatBuffer (float[] data){
+    private FloatBuffer storeDataInFloatBuffer(float[] data) {
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
         buffer.put(data); // here buffer is expecting to be written to
         buffer.flip(); // preparing the buffer to be read from and not written to
-        return buffer;		// here the buffer can be read from (after flip)
+        return buffer;        // here the buffer can be read from (after flip)
     }
 
 
