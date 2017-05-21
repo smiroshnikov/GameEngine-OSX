@@ -32,6 +32,21 @@ public abstract class ShaderProgram {
         bindAttributes();
         GL20.glLinkProgram(programID);
         GL20.glValidateProgram(programID);
+        getAllUniformLocations();
+    }
+
+    /**
+     * a must by framework!
+     */
+    // TODO read about this one!
+    protected abstract void getAllUniformLocations();
+
+    /**
+     * @param uniformName name of the variale as it appears in the shader code (SDSL)
+     * @return integet that represents the location of that uniform variable
+     */
+    private int getUniformLocation(String uniformName) {
+        return GL20.glGetUniformLocation(programID, uniformName);
     }
 
     public void start() {
