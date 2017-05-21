@@ -15,7 +15,7 @@ public class Renderer {
     public void prepare() {
         // TODO read about alpha channel ?
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-        GL11.glClearColor(128, 0, 128, 1);
+        GL11.glClearColor(128, 128, 128, 1);
     }
 
 //    public void render(RawModel model) {
