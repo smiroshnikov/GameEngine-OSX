@@ -22,6 +22,7 @@ public class StaticShader extends ShaderProgram {
     protected void bindAttributes() {
         // position is used in vertex file , 0 means first  attribute list  in the VAO
         super.bindAttributes(0, "position");
+        super.bindAttributes(1, "textureCoords");
 
     }
 }
