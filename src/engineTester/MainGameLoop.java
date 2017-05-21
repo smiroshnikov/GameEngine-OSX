@@ -5,9 +5,10 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
-import renderEngine.RawModel;
+import models.RawModel;
 import renderEngine.Renderer;
 import shaders.StaticShader;
+import textures.ModelTexture;
 
 public class MainGameLoop {
 
@@ -37,6 +38,7 @@ public class MainGameLoop {
         };
 
         RawModel model = loader.loadToVAO(vertices, indices);
+        ModelTexture modelTexture = new ModelTexture(loader.loadTexture("myLogo"));
 
         while (!Display.isCloseRequested()) {
 

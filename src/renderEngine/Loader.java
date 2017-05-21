@@ -8,6 +8,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.RawModel;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -44,7 +45,7 @@ public class Loader {
     public int loadTexture(String fileName) {
         Texture texture = null;
         try {
-            texture = TextureLoader.getTexture("PNG", new FileInputStream("res" + fileName + ".png"));
+            texture = TextureLoader.getTexture("PNG", new FileInputStream("res/" + fileName + ".png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -57,11 +58,17 @@ public class Loader {
 
 
     public void cleanUP() {
-        for (int vao : vaos) {
+        for (int vao :
+                vaos) {
             GL30.glDeleteVertexArrays(vao);
         }
-        for (int vbo : vbos) {
+        for (int vbo :
+                vbos) {
             GL15.glDeleteBuffers(vbo);
+        }
+        for (int texture :
+                textures) {
+            GL11.glDeleteTextures(texture);
         }
 
     }
