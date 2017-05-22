@@ -61,25 +61,9 @@ public class MainGameLoop {
         while (!Display.isCloseRequested()) {
             // game logicRegion
 
-            float epsilon = 0.000001f;
-            float screenLimit = 1.3f;
 
-            entity.increasePosition(0.02f, 0, 0);
-            System.out.println("forward -> " + entity.getPosition().getX());
-
-
-            if (abs(entity.getPosition().getX() - screenLimit) < epsilon) {
-                System.out.println("HERE!");
-                while (abs(entity.getPosition().getX() - screenLimit) > epsilon) {
-                    entity.increasePosition(-0.02f, 0, 0);
-                }
-            }
-//            if (abs(entity.getPosition().getX() - 1.49f) > epsilon) {
-//                while (entity.getPosition().getX() > -epsilon) {
-//                    entity.increasePosition(-0.02f, 0, 0);
-//                    System.out.println("<- backward " + entity.getPosition().getX());
-//                }
-//            }
+            entity.increasePosition(0.002f, 0, 0);
+            entity.increaseRotation(0, 1, 0);
 
             // game logicRegion
             renderer.prepare();
