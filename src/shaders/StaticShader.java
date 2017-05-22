@@ -1,5 +1,7 @@
 package shaders;
 
+import org.lwjgl.util.vector.Matrix4f;
+
 /**
  * Created by smiroshn on 5/20/17.
  */
@@ -10,10 +12,11 @@ public class StaticShader extends ShaderProgram {
 
     private static final String FRAGMENT_FILE = "/Users/smiroshn/IdeaProjects/GameEngine/src/shaders/fragmentShader";
 
+    private int location_transformationMatrix;
+
     public StaticShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
     }
-
 
     /**
      * This tiny method provides connection between shaders and the rest of the program
@@ -25,4 +28,15 @@ public class StaticShader extends ShaderProgram {
         super.bindAttributes(1, "textureCoords");
 
     }
+
+    @Override
+    protected void getAllUniformLocations() {
+        location_transformationMatrix = super.getUniformLocation("transformationMatrix");
+    }
+
+    public void loadTransformationMatrix(Matrix4f matrix) {
+        super.loadMatrix(location_transformationMatrix, matrix);
+    }
+
+
 }
