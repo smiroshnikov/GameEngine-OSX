@@ -3,6 +3,8 @@ package shaders;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.util.vector.Vector3f;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -74,6 +76,14 @@ public abstract class ShaderProgram {
     //must be created because OpenGL needs it ??!!
     // TODO read!
     protected abstract void bindAttributes();
+
+    protected void loadFloat(int location, float value) {
+        GL20.glUniform1f(location, value);
+    }
+
+    protected void loadVector(int location, Vector3f vector) {
+
+    }
 
     /**
      * Receives file name of the source code file (either shader or fragment)
