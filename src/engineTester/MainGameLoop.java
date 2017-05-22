@@ -1,15 +1,19 @@
 package engineTester;
 
+import entities.Entity;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import models.RawModel;
 import renderEngine.Renderer;
 import shaders.StaticShader;
 import textures.ModelTexture;
+
+import static java.lang.Math.abs;
 
 public class MainGameLoop {
 
@@ -51,16 +55,27 @@ public class MainGameLoop {
 
 
         RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("myLogo"));
-        TexturedModel texturedModel = new TexturedModel(model, texture);
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("myLogoBright")));
+        Entity entity = new Entity(staticModel, new Vector3f(-1, 0, 0), 0, 0, 0, 0.5f);
 
         while (!Display.isCloseRequested()) {
+            // game logicRegion
 
+            float epsilon = 0.000001f;
+            entity.increasePosition(0.02f, 0, 0);
+            System.out.println("forward -> " + entity.getPosition().getX());
+
+            if (abs(entity.getPosition().getX()) > 1.49f) {
+                while (entity.getPosition().getX() > -epsilon) {
+                    entity.increasePosition(-0.02f, 0, 0);
+                    System.out.println("<- backward " + entity.getPosition().getX());
+                }
+            }
+
+            // game logicRegion
             renderer.prepare();
             shader.start();
-
-            // game logic
-            renderer.render(texturedModel);
+            renderer.render(entity, shader);
             shader.stop();
             DisplayManager.updateDisplay();
         }
