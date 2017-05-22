@@ -19,14 +19,15 @@ public class MainGameLoop {
 
     public static void main(String[] args) {
 
-        Loader loader = new Loader();
-        Renderer renderer = new Renderer();
         DisplayManager.createDisplay();
+        Loader loader = new Loader();
+
 
         System.out.println("LWJGL Version :" + org.lwjgl.Sys.getVersion());
         System.out.println("OpenGL Version :" + GL11.glGetString(GL11.GL_VERSION));
 
         StaticShader shader = new StaticShader();
+        Renderer renderer = new Renderer(shader);
 
 
         // object coordinatesVBO
@@ -56,13 +57,13 @@ public class MainGameLoop {
 
         RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
         TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("myLogoBright")));
-        Entity entity = new Entity(staticModel, new Vector3f(-1, 0, 0), 0, 0, 0, 0.5f);
+        Entity entity = new Entity(staticModel, new Vector3f(0, 0, -1), 0, 0, 0, 0.9f);
 
         while (!Display.isCloseRequested()) {
             // game logicRegion
 
 
-            entity.increasePosition(0.002f, 0, 0);
+            entity.increasePosition(0, 0, -0.001f);
             entity.increaseRotation(0, 1, 0);
 
             // game logicRegion
