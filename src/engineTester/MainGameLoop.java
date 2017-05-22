@@ -1,5 +1,6 @@
 package engineTester;
 
+import entities.Camera;
 import entities.Entity;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
@@ -57,7 +58,8 @@ public class MainGameLoop {
 
         RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
         TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("myLogoBright")));
-        Entity entity = new Entity(staticModel, new Vector3f(0, 0, -1), 0, 0, 0, 0.9f);
+        Entity entity = new Entity(staticModel, new Vector3f(0, 0, -1), 0, 0, 0, 0.6f);
+        Camera camera = new Camera();
 
         while (!Display.isCloseRequested()) {
             // game logicRegion
@@ -68,7 +70,9 @@ public class MainGameLoop {
 
             // game logicRegion
             renderer.prepare();
+            camera.move();
             shader.start();
+            shader.loadViewMatrix(camera);
             renderer.render(entity, shader);
             shader.stop();
             DisplayManager.updateDisplay();
