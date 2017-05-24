@@ -1,6 +1,8 @@
 package engineTester;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -22,11 +24,21 @@ public class Boot {
         GL11.glLoadIdentity();//?
         GL11.glOrtho(0, 600, 400, 0, 1, -1); //Camera
 
-        while (!Display.isCloseRequested()) {
+        while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 
-            GL11.glBegin(GL11.GL_LINES);
-            GL11.glVertex2f(10, 10);
-            GL11.glVertex2f(100, 100);
+            // Useful for mouse degub
+            float mouseX = Mouse.getX();
+            float mouseY = Mouse.getY();
+            System.out.println("Mouse :x " + mouseX + "Mouse :y " + mouseY);
+
+
+            GL11.glBegin(GL11.GL_POLYGON);
+            GL11.glVertex3f(120.0f, 120.0f, 0.0f);
+            GL11.glVertex3f(180.0f, 120.0f, 0.0f);
+            GL11.glVertex3f(180.0f, 180.0f, 0.0f);
+            GL11.glVertex3f(120.0f, 180.0f, 0.0f);
+
+
             GL11.glEnd();
 
             Display.update();
