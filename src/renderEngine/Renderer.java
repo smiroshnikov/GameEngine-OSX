@@ -32,7 +32,7 @@ public class Renderer {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         // TODO read about alpha channel ...
-        GL11.glClearColor(128, 0, 128, 1);
+        GL11.glClearColor(78, 0, 42, 1);
     }
 
 //    public void render(RawModel model) {
