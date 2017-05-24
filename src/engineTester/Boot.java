@@ -26,7 +26,7 @@ public class Boot {
 
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 
-            // Useful for mouse degub
+            // Useful for mouse degug
             float mouseX = Mouse.getX();
             float mouseY = Mouse.getY();
             System.out.println("Mouse :x " + mouseX + "Mouse :y " + mouseY);
