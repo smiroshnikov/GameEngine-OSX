@@ -5,7 +5,12 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -63,8 +68,21 @@ public class Artist {
 
         glTexCoord2d(0, 1);
         glVertex2f(0, height);
-        //--texture quad 
-
+        //--texture quad
+        glLoadIdentity();
+        glEnd();
     }
+
+    public static Texture loadTexture(String path, String fileType) {
+        Texture texture = null;
+        InputStream in = ResourceLoader.getResourceAsStream(path);
+        try {
+            texture = TextureLoader.getTexture(fileType, in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return texture;
+    }
+
 
 }

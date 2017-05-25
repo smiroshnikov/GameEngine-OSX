@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.opengl.Texture;
 
 import static tower.helpers.Artist.*;
 
@@ -18,7 +19,7 @@ public class Boot {
         //Static
         BeginSession();
 
-
+        Texture t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/grass-green.png", "PNG");
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             //DONT REMOVE THIS LINE , OPENGL is fucked up on mac , this line clears buffer
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
@@ -27,7 +28,7 @@ public class Boot {
             // START HERE
 
             DrawQuad(100, 100, 100, 100);
-            DrawQuad(200, 200, 100, 100);
+            DrawQuad(200, 200, 101, 101);
 
             System.out.println("X:" + Mouse.getX() + "  " + "Y:" + Mouse.getY());
 
