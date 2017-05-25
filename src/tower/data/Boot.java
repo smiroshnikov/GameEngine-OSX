@@ -23,6 +23,9 @@ public class Boot {
             //DONT REMOVE THIS LINE , OPENGL is fucked up on mac , this line clears buffer
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 
+
+            // START HERE
+
             DrawQuad(100, 100, 100, 100);
             DrawQuad(200, 200, 100, 100);
 
