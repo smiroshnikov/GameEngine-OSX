@@ -35,6 +35,14 @@ public class Boot {
             GL11.glVertex2f(100, 100);
             GL11.glEnd();
 
+            GL11.glBegin(GL11.GL_QUADS);
+            GL11.glVertex2f(100, 100);
+            GL11.glVertex2f(150, 100);
+            GL11.glVertex2f(150, 150);
+            GL11.glVertex2f(100, 150);
+            GL11.glEnd();
+
+            System.out.println("X:" + Mouse.getX() + "  " + "Y:" + Mouse.getY());
 
             Display.update();
             Display.sync(30);
