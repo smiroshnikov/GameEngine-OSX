@@ -19,10 +19,11 @@ public class Boot {
         //Static
         BeginSession();
 
-//        Texture t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/ground-stones.png", "PNG");
-//        Texture t2 = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/grey-road.png", "PNG");
         Texture t = QuickLoad("ground-stones.png");
         Texture t2 = QuickLoad("grey-road.png");
+        Tile grass_tile = new Tile(0, 0, 64, 64, TileType.Grass);
+        Tile road_tile = new Tile(0, 64, 64, 64, TileType.Road);
+
 
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             //DON'T REMOVE THIS LINE , OPENGL is fucked up on mac , this line clears buffer
@@ -30,8 +31,9 @@ public class Boot {
 
 
             // START HERE
-            DrawQuadTex(t, 0, 0, 64, 64);
-            DrawQuadTex(t2, 64, 64, 64, 64);
+            DrawQuadTex(grass_tile.getTexture(), grass_tile.getX(), grass_tile.getY(), grass_tile.getWidth(), grass_tile.getHeight());
+            DrawQuadTex(road_tile.getTexture(), road_tile.getX(), road_tile.getY(), road_tile.getWidth(), road_tile.getHeight());
+
 
 
             System.out.println("X:" + Mouse.getX() + "  " + "Y:" + Mouse.getY());
