@@ -5,7 +5,7 @@ package tower.data;
  * Created by smiroshn on 5/27/17.
  */
 public enum TileType {
-    Grass("grass.png", true), Dirt("dirt.png", false), SandRune("sandRune.png", false);
+    Grass("grass.png", true), Dirt("dirt.png", false), SandRune("sandRune.png", false), Chaos("Chaos.png", false), Water("water.png", false);
     String textureName;
     boolean buildable; //if can be build on !
 

@@ -32,6 +32,13 @@ public class TileGrid {
                     case 2:
                         map[i][j] = new Tile(i * 64, j * 64, 64, 64, TileType.SandRune);
                         break;
+                    case 3:
+                        map[i][j] = new Tile(i * 64, j * 64, 64, 64, TileType.Chaos);
+                        break;
+                    case 4:
+                        map[i][j] = new Tile(i * 64, j * 64, 64, 64, TileType.Water);
+                        break;
+
                     default:
                         map[i][j] = new Tile(i * 64, j * 64, 64, 64, TileType.Grass);
                 }
