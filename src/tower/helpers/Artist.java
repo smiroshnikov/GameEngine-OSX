@@ -36,7 +36,8 @@ public class Artist {
         glLoadIdentity();//?
         glOrtho(0, 600, 400, 0, 1, -1); //Camera
         glMatrixMode(GL_MODELVIEW);
-        glEnableClientState(GL_TEXTURE_2D);
+        glEnable(GL_TEXTURE_2D); // mising in the tutorial
+        // glEnableClientState(GL_TEXTURE_2D);
 
     }
 
@@ -52,6 +53,7 @@ public class Artist {
 
     public static void DrawQuadTex(Texture texture, float x, float y, float width, float height) {
         // Binding texture to openGL
+
         texture.bind();
         // 
         glTranslatef(x, y, 0);

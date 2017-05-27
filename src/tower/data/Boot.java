@@ -19,7 +19,7 @@ public class Boot {
         //Static
         BeginSession();
 
-        Texture t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/grass-green.png", "PNG");
+        Texture t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/ground-stones.png", "PNG");
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             //DON'T REMOVE THIS LINE , OPENGL is fucked up on mac , this line clears buffer
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
