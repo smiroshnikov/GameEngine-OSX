@@ -34,7 +34,7 @@ public class Artist {
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, 600, 400, 0, 1, -1); //Camera
+        glOrtho(0, WIDTH, HEIGHT, 0, 1, -1); //Camera ??? Resolution??!?!??!
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_TEXTURE_2D);
 
