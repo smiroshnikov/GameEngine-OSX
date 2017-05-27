@@ -32,12 +32,11 @@ public class Artist {
             e.printStackTrace();
         }
 
-        glMatrixMode(GL_PROJECTION); //?
-        glLoadIdentity();//?
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
         glOrtho(0, 600, 400, 0, 1, -1); //Camera
         glMatrixMode(GL_MODELVIEW);
-        glEnable(GL_TEXTURE_2D); // mising in the tutorial
-        // glEnableClientState(GL_TEXTURE_2D);
+        glEnable(GL_TEXTURE_2D);
 
     }
 
@@ -71,8 +70,9 @@ public class Artist {
         glTexCoord2d(0, 1);
         glVertex2f(0, height);
         //--texture quad
-        glLoadIdentity();
         glEnd();
+        glLoadIdentity(); //should be in the end
+
     }
 
     public static Texture loadTexture(String path, String fileType) {
@@ -86,5 +86,16 @@ public class Artist {
         return texture;
     }
 
+    /**
+     * Loads a tile file
+     *
+     * @param name filename of the texture file
+     * @return loaded  texture
+     */
+    public static Texture QuickLoad(String name) {
+        Texture t = null;
+        t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/" + name, "PNG");
+        return t;
+    }
 
 }

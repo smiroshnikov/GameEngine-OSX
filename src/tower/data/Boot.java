@@ -19,7 +19,11 @@ public class Boot {
         //Static
         BeginSession();
 
-        Texture t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/ground-stones.png", "PNG");
+//        Texture t = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/ground-stones.png", "PNG");
+//        Texture t2 = loadTexture("/Users/smiroshn/IdeaProjects/GameEngine/src/tower/res/grey-road.png", "PNG");
+        Texture t = QuickLoad("ground-stones.png");
+        Texture t2 = QuickLoad("grey-road.png");
+
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             //DON'T REMOVE THIS LINE , OPENGL is fucked up on mac , this line clears buffer
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
@@ -27,6 +31,7 @@ public class Boot {
 
             // START HERE
             DrawQuadTex(t, 0, 0, 64, 64);
+            DrawQuadTex(t2, 64, 64, 64, 64);
 
 
             System.out.println("X:" + Mouse.getX() + "  " + "Y:" + Mouse.getY());
