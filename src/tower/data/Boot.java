@@ -19,11 +19,7 @@ public class Boot {
         //Static
         BeginSession();
 
-        Texture t = QuickLoad("ground-stones.png");
-        Texture t2 = QuickLoad("grey-road.png");
-        Tile grass_tile = new Tile(0, 0, 64, 64, TileType.Grass);
-        Tile road_tile = new Tile(0, 64, 64, 64, TileType.Road);
-
+        TileGrid grid = new TileGrid();
 
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             //DON'T REMOVE THIS LINE , OPENGL is fucked up on mac , this line clears buffer
@@ -31,11 +27,10 @@ public class Boot {
 
 
             // START HERE
-            DrawQuadTex(grass_tile.getTexture(), grass_tile.getX(), grass_tile.getY(), grass_tile.getWidth(), grass_tile.getHeight());
-            DrawQuadTex(road_tile.getTexture(), road_tile.getX(), road_tile.getY(), road_tile.getWidth(), road_tile.getHeight());
+            grid.Draw();
 
 
-
+            //Debug
             System.out.println("X:" + Mouse.getX() + "  " + "Y:" + Mouse.getY());
 
             Display.update();

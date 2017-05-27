@@ -2,6 +2,8 @@ package tower.data;
 
 import org.newdawn.slick.opengl.Texture;
 
+import static tower.helpers.Artist.DrawQuad;
+import static tower.helpers.Artist.DrawQuadTex;
 import static tower.helpers.Artist.QuickLoad;
 
 /**
@@ -19,6 +21,10 @@ public class Tile {
         this.height = height;
         this.type = type;
         this.texture = QuickLoad(type.textureName);
+    }
+
+    public void Draw() {
+        DrawQuadTex(texture, x, y, width, height);
     }
 
     public float getX() {
